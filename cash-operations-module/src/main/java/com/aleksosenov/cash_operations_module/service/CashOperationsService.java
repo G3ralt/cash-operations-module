@@ -8,12 +8,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class CashOperationsService {
 
-
     @Autowired
     private ApplicationEventPublisher eventPublisher;
 
     public String performTransaction(CashOperation cashOperation) {
-        return null;
+        switch (cashOperation.getOperationType()) {
+            case DEPOSIT -> deposit(cashOperation);
+            case WITHDRAW -> withdraw(cashOperation);
+        }
+        return "OK";
+    }
+
+    private void deposit(CashOperation cashOperation) {
+    }
+
+
+    private void withdraw(CashOperation cashOperation) {
     }
 
 }

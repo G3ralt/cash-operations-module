@@ -15,9 +15,9 @@ public class CashOperation {
 
     public static CashOperation fromRequest(CashOperationRequest request) {
         return CashOperation.builder()
-                .operationType(request.getOperationType())
-                .currency(request.getCurrency())
-                .denominationAmounts(request.getDenominationAmounts())
+                .operationType(request.operationType())
+                .currency(request.currency())
+                .denominationAmounts(request.denominationAmounts())
                 .build();
     }
 }
