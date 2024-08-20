@@ -18,4 +18,9 @@ public class Cashier {
     private Map<Currency, Map<Denomination, Integer>> initialDenominations;
     @Setter
     private Map<Currency, Map<Denomination, Integer>> denominations;
+
+    public static Integer getTotalForCurrency(Map.Entry<Currency, Map<Denomination, Integer>> currencyMapEntry) {
+        return currencyMapEntry.getValue().entrySet().stream()
+                .reduce(0, (subtotal, denominationEntry) -> Integer.sum(subtotal, denominationEntry.getKey().getValue() * denominationEntry.getValue()), Integer::sum);
+    }
 }

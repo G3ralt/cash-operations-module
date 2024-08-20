@@ -4,6 +4,7 @@ import com.aleksosenov.cash_operations_module.events.CashBalanceEvent;
 import com.aleksosenov.cash_operations_module.model.Cashier;
 import com.aleksosenov.cash_operations_module.model.Currency;
 import com.aleksosenov.cash_operations_module.model.Denomination;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -11,12 +12,13 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 @Service
+@AllArgsConstructor
 public class CashBalanceService {
 
     @Autowired
-    Cashier cashier;
+    private Cashier cashier;
     @Autowired
-    CashBalanceFileService cashBalanceFileService;
+    private CashBalanceFileService cashBalanceFileService;
     @Autowired
     private ApplicationEventPublisher eventPublisher;
 
