@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class CashBalanceFileService {
-    public static final String FILE_NAME = "balance.txt";
+    public static final String FILE_NAME = "classpath:balance.txt";
     public static final String LOGIC_SEPARATOR = "\\|";
     public static final String DENOMINATION_SEPARATOR = ",";
     public static final String AMOUNT_SEPARATOR = "x";
@@ -36,7 +36,7 @@ public class CashBalanceFileService {
     }
 
     private void writeToFile(List<String> currencyStrings) {
-        try (FileWriter fileWriter = new FileWriter(String.valueOf(ResourceUtils.getFile("classpath:balance.txt").toPath()));
+        try (FileWriter fileWriter = new FileWriter(String.valueOf(ResourceUtils.getFile(FILE_NAME).toPath()));
              PrintWriter printWriter = new PrintWriter(fileWriter)
         ) {
             currencyStrings.forEach(printWriter::println);
@@ -64,7 +64,7 @@ public class CashBalanceFileService {
 
     public Map<Currency, Map<Denomination, Integer>> getBalanceFromFile() {
         try {
-            List<String> content = Files.readAllLines(ResourceUtils.getFile("classpath:balance.txt").toPath());
+            List<String> content = Files.readAllLines(ResourceUtils.getFile(FILE_NAME).toPath());
             return content.stream()
                     .map(s -> s.split(LOGIC_SEPARATOR))
                     .collect(Collectors.toMap(strings -> Currency.valueOf(strings[0]), this::createDenominationsMap));
@@ -78,7 +78,9 @@ public class CashBalanceFileService {
     private Map<Denomination, Integer> createDenominationsMap(String[] strings) {
         List<String> denomStrings = Arrays.stream(strings[2].split(DENOMINATION_SEPARATOR)).collect(Collectors.toList());
         return denomStrings.stream().map(s -> s.split(AMOUNT_SEPARATOR))
-                .collect(Collectors.toMap(array -> Denomination.findByValue(Integer.parseInt(array[0])), array -> Integer.parseInt(array[1])));
+                .collect(Collectors.toMap(array ->
+                        Denomination.valueOf(array[0]),
+                        array -> Integer.parseInt(array[1])));
     }
 
 

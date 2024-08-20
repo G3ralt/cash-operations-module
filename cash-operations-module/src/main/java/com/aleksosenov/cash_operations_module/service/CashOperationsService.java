@@ -1,5 +1,6 @@
 package com.aleksosenov.cash_operations_module.service;
 
+import com.aleksosenov.cash_operations_module.events.CashOperationEvent;
 import com.aleksosenov.cash_operations_module.model.CashOperation;
 import com.aleksosenov.cash_operations_module.model.Cashier;
 import com.aleksosenov.cash_operations_module.model.Currency;
@@ -25,6 +26,7 @@ public class CashOperationsService {
             case DEPOSIT -> executeOperation(cashOperation, Integer::sum);
             case WITHDRAW -> executeOperation(cashOperation, this::subtract);
         }
+        eventPublisher.publishEvent(new CashOperationEvent(this, cashOperation));
         return "OK";
     }
 
