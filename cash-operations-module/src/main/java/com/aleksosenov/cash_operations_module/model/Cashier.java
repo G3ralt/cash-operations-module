@@ -2,15 +2,18 @@ package com.aleksosenov.cash_operations_module.model;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.stereotype.Component;
 
-import java.util.Currency;
 import java.util.Map;
 
 @Getter
 @Builder
 @Component
+@ToString
 public class Cashier {
     private final String username = "MARTINA";
-    private final Map<Currency, Map<Denomination, Integer>> denominations;
+    @Setter
+    private Map<Currency, Map<Denomination, Integer>> denominations;
 }
