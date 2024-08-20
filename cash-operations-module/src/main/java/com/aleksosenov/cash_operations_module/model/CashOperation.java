@@ -3,10 +3,11 @@ package com.aleksosenov.cash_operations_module.model;
 import com.aleksosenov.cash_operations_module.model.dto.CashOperationRequest;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 
 import java.util.Map;
 
-@Data
+@Getter
 @Builder
 public class CashOperation {
     private final OperationType operationType;
@@ -15,9 +16,9 @@ public class CashOperation {
 
     public static CashOperation fromRequest(CashOperationRequest request) {
         return CashOperation.builder()
-                .operationType(request.operationType())
-                .currency(request.currency())
-                .denominationAmounts(request.denominationAmounts())
+                .operationType(request.getOperationType())
+                .currency(request.getCurrency())
+                .denominationAmounts(request.getDenominationAmounts())
                 .build();
     }
 }
