@@ -15,5 +15,7 @@ import java.util.Map;
 public class Cashier {
     private final String username = "MARTINA";
     @Setter
+    private Map<Currency, Map<Denomination, Integer>> initialDenominations;
+    @Setter
     private Map<Currency, Map<Denomination, Integer>> denominations;
 }
