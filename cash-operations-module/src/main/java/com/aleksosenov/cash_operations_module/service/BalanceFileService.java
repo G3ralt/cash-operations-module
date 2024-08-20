@@ -21,8 +21,6 @@ public class BalanceFileService {
     public Map<Currency, Map<Denomination, Integer>> getBalanceFromFile() {
         try {
             List<String> content = Files.readAllLines(ResourceUtils.getFile("classpath:balance.txt").toPath());
-            System.out.println(LOGIC_SEPARATOR);
-            content.forEach(System.out::println);
             return content.stream()
                     .map(s -> s.split(LOGIC_SEPARATOR))
                     .collect(Collectors.toMap(strings -> Currency.valueOf(strings[0]), this::createDenominationsMap));
